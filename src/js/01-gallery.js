@@ -11,14 +11,14 @@ addMarkup(galleryItems);
 function createMarkup(items) {
   return items
     .map(item => {
-      return `<li><a class="gallery__item gallery__link" href="${item.original}">
+      return `<a class="gallery__item gallery__link" href="${item.original}">
     <img
       class="gallery__image"
       src="${item.preview}"
       alt="${item.description}"
       title="${item.description}"
     />
-  </a></li>`;
+  </a>`;
     })
     .join('');
 }

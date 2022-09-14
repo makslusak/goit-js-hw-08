@@ -77,22 +77,19 @@
 // }
 
 import Player from '@vimeo/player';
-// имортируем названия скрипта с пекендж джейсон
 import Throttle from 'lodash.throttle';
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
-// переменная для удобства для функции videoplayer-current-time
+
 const timekey = 'videoplayer-current-time';
 player.on('timeupdate', durationSavelocalstorage);
-// создали функцию, с помощью деструктаризации вытащили секунды собьекта тайм апдейт(записали в локальное хранилище)
+
 function durationSavelocalstorage({ seconds }) {
   localStorage.setItem(timekey, seconds);
 }
-// localStorage.setItem('test', '123');
 
-// при перезагрузки страницы перезагружался плеер
 window.addEventListener('load', newStart);
-player.on('timeupdate', Throttle(durationSavelocalstorage, 1000));
+player.on('timeupdate', Throttle(durationSavelocalstorage, 2000));
 function newStart() {
   if (!localStorage.getItem(timekey)) {
     return;
