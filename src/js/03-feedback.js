@@ -7,14 +7,12 @@ const localKey = 'feedback-form-state';
 
 form.addEventListener('input', Throttle(storageFormData, 500));
 form.addEventListener('submit', onFormSubmit);
+window.addEventListener('load', showStorage);
+
+const savedData = JSON.parse(localStorage.getItem(localKey));
 
 function onFormSubmit(event) {
   event.preventDefault();
-  // const { email, message } = event.currentTarget.elements;
-  // вывести в консоль в1
-  //   console.log({ email: email.value, message: message.value });
-  // вывести в консоль в2
-  const savedData = JSON.parse(localStorage.getItem(localKey));
   console.dir(savedData);
   localStorage.removeItem(localKey);
   event.currentTarget.reset();
@@ -27,4 +25,10 @@ function storageFormData(event) {
   }
   formValue[event.target.name] = event.target.value;
   localStorage.setItem(localKey, JSON.stringify(formValue));
+}
+function showStorage() {
+  if (localStorage.getItem(localKey)) {
+    email.value = savedData.email;
+    message.value = savedData.message;
+  }
 }
